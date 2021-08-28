@@ -1,0 +1,14 @@
+.idea/
+.vscode/
+.next/
+node_modules/
+
+dist/
+/build/
+out/
+
+*-debug.log
+*-error.log
+package-lock.json
+yarn.lock
+.DS_Store
