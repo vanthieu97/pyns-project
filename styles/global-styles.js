@@ -49,6 +49,11 @@ export default css.global`
   .mt-12 {
     margin-top: 12px;
   }
+  .my-16 {
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+
   /* Overwrite AntD styles */
   .ant-layout-content {
     margin: 0 16px;
@@ -79,6 +84,8 @@ export default css.global`
   }
 
   .wrapper {
+    height: 100vh;
+    overflow: auto;
     .top-header {
       background: #fff;
       @media (max-width: 768px) {
@@ -99,5 +106,11 @@ export default css.global`
     max-width: 500px;
     margin-left: auto;
     margin-right: auto;
+  }
+  .ant-btn,
+  .ant-input,
+  .ant-picker,
+  .ant-select-selector {
+    border-radius: 5px !important;
   }
 `
