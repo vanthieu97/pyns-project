@@ -1,15 +1,15 @@
 import React from 'react'
 import Link from 'next/link'
 import Head from 'next/head'
-import { Typography, Form, Input, Button, Divider } from 'antd'
+import { Typography, Form, Input, Button, Divider, Radio, Select, DatePicker } from 'antd'
 import { useForm } from 'antd/lib/form/Form'
-import { LockOutlined, MobileOutlined } from '@ant-design/icons'
-import { PHONE_REGEX } from 'shared/constants'
+import { LockOutlined, MobileOutlined, UserOutlined } from '@ant-design/icons'
+import { DATE_FORMAT, PHONE_REGEX } from 'shared/constants'
 
 const { Title } = Typography
 const { Item } = Form
 
-const Login = () => {
+const Register = () => {
   const [form] = useForm()
 
   const onClickSubmit = () => {
@@ -19,12 +19,23 @@ const Login = () => {
   return (
     <>
       <Head>
-        <title>Đăng nhập</title>
+        <title>Đăng ký</title>
       </Head>
       <Title level={4} className="text-center">
-        PyNS
+        Đăng ký
       </Title>
       <Form form={form} labelCol={{ span: 0, sm: { span: 5 } }} labelAlign="left" className="form-wrapper mt-12">
+        <Item name="type" required rules={[{ required: true, message: 'Vui lòng chọn loại' }]} label="Loại">
+          <Radio.Group
+            options={[
+              { value: 'personal', label: 'Cá nhân' },
+              { value: 'company', label: 'Công ty' },
+            ]}
+          />
+        </Item>
+        <Item name="name" required rules={[{ required: true, message: 'Vui lòng nhập tên' }]} label="Tên">
+          <Input placeholder="Nhập tên" prefix={<UserOutlined />} />
+        </Item>
         <Item
           name="phone"
           required
@@ -43,8 +54,23 @@ const Login = () => {
         >
           <Input placeholder="Nhập số điện thoại" prefix={<MobileOutlined />} />
         </Item>
-        <Item name="password" required rules={[{ required: true, message: 'Vui lòng nhập mật khẩu' }]} label="Mật khẩu">
-          <Input.Password placeholder="Nhập mật khẩu" prefix={<LockOutlined />} />
+        <Item name="gender" label="Giới tính" required rules={[{ required: true, message: 'Vui lòng chọn giới tính' }]}>
+          <Select
+            options={[
+              { value: 'man', label: 'Nam' },
+              { value: 'woman', label: 'Nữ' },
+              { value: 'other', label: 'Khác' },
+            ]}
+            placeholder="Chọn giới tính"
+          />
+        </Item>
+        <Item
+          name="birthday"
+          label="Ngày sinh"
+          required
+          rules={[{ required: true, message: 'Vui lòng chọn ngày sinh' }]}
+        >
+          <DatePicker className="w-100" format={DATE_FORMAT} />
         </Item>
         <div className="text-center">
           <Button type="primary" onClick={onClickSubmit} className="mt-8">
@@ -66,4 +92,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default Register
