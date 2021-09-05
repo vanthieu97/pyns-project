@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "ENV_ARG=development next dev",
     "build": "next telemetry disable && next build",
-    "start": "next start"
+    "start": "next start -p $PORT"
   },
   "devDependencies": {
     "@ant-design/icons": "4.6.2",
