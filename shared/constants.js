@@ -7,3 +7,5 @@ export const BE_DATE_FORMAT = 'DD-MM-YYYY'
 export const HIDDEN_HEADER_PAGE = ['/login', '/register']
 
 export const LOCAL_STORAGE_TOKEN = 'Pyns_Token'
+
+export const DEFAULT_LIMIT = 10

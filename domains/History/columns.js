@@ -1,3 +1,4 @@
+import { Button } from 'antd'
 import moment from 'moment'
 import { DATE_FORMAT } from 'shared/constants'
 
@@ -8,28 +9,29 @@ export default [
     align: 'center',
   },
   {
-    title: 'Tên gói',
-    dataIndex: 'name',
-  },
-  {
-    title: 'Thời gian mua',
-    dataIndex: 'bought_date',
+    title: 'Thời gian xuất',
+    dataIndex: 'export_date',
     align: 'center',
     render: (value) => moment(value).format(DATE_FORMAT),
   },
   {
-    title: 'Số lượng mua',
-    dataIndex: 'quantity',
+    title: 'Họ tên',
+    dataIndex: 'name',
     align: 'center',
   },
   {
-    title: 'Đã dùng',
-    dataIndex: 'used',
+    title: 'Ngày sinh',
+    dataIndex: 'date_of_birth',
     align: 'center',
+    render: (value) => moment(value).format(DATE_FORMAT),
   },
   {
-    title: 'Còn lại',
-    dataIndex: 'remain',
+    title: 'Hành động',
     align: 'center',
+    render: (value, record) => (
+      <Button type="primary" ghost>
+        Tải về
+      </Button>
+    ),
   },
 ]

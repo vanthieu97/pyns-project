@@ -4,10 +4,11 @@ import Head from 'next/head'
 import { Typography, Form, Input, Button, Divider, message } from 'antd'
 import { useForm } from 'antd/lib/form/Form'
 import { LockOutlined, MobileOutlined } from '@ant-design/icons'
-import { LOCAL_STORAGE_TOKEN, PHONE_REGEX } from 'shared/constants'
+import { PHONE_REGEX } from 'shared/constants'
 import { useLoginMutation } from 'redux/pynsAPIs'
 import { useRouter } from 'next/router'
 import { getErrorMessage } from 'shared/utility'
+import { useSelector } from 'react-redux'
 
 const { Title } = Typography
 const { Item } = Form
@@ -15,19 +16,15 @@ const { Item } = Form
 const Login = () => {
   const [form] = useForm()
   const router = useRouter()
-  const [login, { data: loginData, error: loginError, isLoading: loginLoading }] = useLoginMutation()
+  const [login, { error: loginError, isLoading: loginLoading }] = useLoginMutation()
+  const token = useSelector((state) => state.user.token)
 
   useEffect(() => {
-    if (loginData) {
-      localStorage.setItem(LOCAL_STORAGE_TOKEN, loginData.token)
-      message.success('Đăng nhập thành công.')
-      const nextQuery = router.query.next
-      if (nextQuery) {
-        return router.push(decodeURIComponent(nextQuery))
-      }
-      return router.push('/')
+    if (router.isReady && token) {
+      message.success('Đăng nhập thành công')
+      router.push(router.query.next ?? '/')
     }
-  }, [loginData])
+  }, [router.isReady, token])
 
   useEffect(() => {
     if (loginError) {
@@ -50,7 +47,7 @@ const Login = () => {
         <Title level={2} className="text-center">
           PyNS
         </Title>
-        <Form form={form} labelCol={{ span: 0, sm: { span: 5 } }} labelAlign="left" className="form-wrapper mt-12">
+        <Form form={form} labelCol={{ span: 5 }} labelAlign="left" className="form-wrapper mt-12">
           <Item
             name="phone"
             required
@@ -86,10 +83,12 @@ const Login = () => {
               <a className="mt-8 d-inline-block">Quên mật khẩu?</a>
             </Link>
             <Divider />
-            <Link href="/register">
-              <Button type="primary" className="mt-8">
-                Tạo tài khoản mới
-              </Button>
+            <Link href={router.query.next ? `/register?next=${encodeURIComponent(router.query.next)}` : '/register'}>
+              <a>
+                <Button type="primary" className="mt-8">
+                  Tạo tài khoản mới
+                </Button>
+              </a>
             </Link>
           </div>
         </Form>

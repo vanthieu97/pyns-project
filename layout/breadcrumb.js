@@ -8,6 +8,7 @@ const breadcrumbNameMap = {
   '/register': 'Đăng ký',
   '/profile': 'Thông tin cá nhân',
   '/package': 'Gói đã sở hữu',
+  '/history': 'Lịch sử xuất báo cáo',
 }
 
 const MyBreadcrumb = () => {
@@ -22,11 +23,13 @@ const MyBreadcrumb = () => {
       </Breadcrumb.Item>
     )
   })
-  const breadcrumbItems = [
-    <Breadcrumb.Item key="home">
-      <Link href="/">Trang chủ</Link>
-    </Breadcrumb.Item>,
-  ].concat(extraBreadcrumbItems)
+  const breadcrumbItems = extraBreadcrumbItems.length
+    ? [
+        <Breadcrumb.Item key="home">
+          <Link href="/">Trang chủ</Link>
+        </Breadcrumb.Item>,
+      ].concat(extraBreadcrumbItems)
+    : []
 
   return <Breadcrumb>{breadcrumbItems}</Breadcrumb>
 }

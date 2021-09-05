@@ -1,8 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { pynsMiddleware, pynsReducer, pynsReducerPath } from './pynsAPIs'
+import userReducer from './user'
 
 const store = configureStore({
   reducer: {
+    user: userReducer,
     [pynsReducerPath]: pynsReducer,
   },
   middleware: (getDefaultMiddleware) =>

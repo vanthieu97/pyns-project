@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Form, Input, Radio, Select, DatePicker } from 'antd'
 import PropTypes from 'prop-types'
 import { PROVINCES } from 'shared/provinces'
@@ -6,15 +6,29 @@ import { DATE_FORMAT, PHONE_REGEX } from 'shared/constants'
 
 const { Item } = Form
 
+const provinceNameMapping = Object.keys(PROVINCES)
+
 const UserForm = ({ form, initialValues = {} }) => {
+  const [selectedProvince, setSelectedProvince] = useState('')
+  const [districts, setDistricts] = useState([])
+
+  useEffect(() => {
+    if (initialValues.city) {
+      setSelectedProvince(initialValues.city)
+    }
+  }, [initialValues])
+
+  useEffect(() => {
+    setDistricts(PROVINCES[selectedProvince]?.sort() ?? [])
+  }, [selectedProvince])
+
+  const onChangeCity = (value) => {
+    setSelectedProvince(value)
+    form.setFieldsValue({ district: null })
+  }
+
   return (
-    <Form
-      form={form}
-      initialValues={initialValues}
-      labelCol={{ span: 0, sm: { span: 7 } }}
-      labelAlign="left"
-      className="mt-12"
-    >
+    <Form form={form} initialValues={initialValues} labelCol={{ span: 7 }} labelAlign="left" className="mt-12">
       <Item name="user_type" required rules={[{ required: true, message: 'Vui lòng chọn loại' }]} label="Loại">
         <Radio.Group
           options={[
@@ -79,7 +93,13 @@ const UserForm = ({ form, initialValues = {} }) => {
         required
         rules={[{ required: true, message: 'Vui lòng chọn tỉnh/thành phố' }]}
       >
-        <Select options={PROVINCES} placeholder="Chọn tỉnh/thành phố" />
+        <Select showSearch autoComplete="new-password" onChange={onChangeCity} placeholder="Chọn tỉnh/thành phố">
+          {provinceNameMapping.map((province) => (
+            <Select.Option key={province} value={province}>
+              {province}
+            </Select.Option>
+          ))}
+        </Select>
       </Item>
       <Item
         name="district"
@@ -87,7 +107,13 @@ const UserForm = ({ form, initialValues = {} }) => {
         required
         rules={[{ required: true, message: 'Vui lòng chọn quận/huyện' }]}
       >
-        <Select options={PROVINCES} placeholder="Chọn quận/huyện" />
+        <Select showSearch autoComplete="new-password" placeholder="Chọn quận/huyện">
+          {districts.map((province) => (
+            <Select.Option key={province} value={province}>
+              {province}
+            </Select.Option>
+          ))}
+        </Select>
       </Item>
       <Item name="address" label="Địa chỉ">
         <Input placeholder="Nhập địa chỉ" />

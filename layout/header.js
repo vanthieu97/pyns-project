@@ -1,29 +1,30 @@
 import React, { useState } from 'react'
 import { Layout, Menu, Space } from 'antd'
-import { UserOutlined } from '@ant-design/icons'
+import { HomeOutlined, UserOutlined } from '@ant-design/icons'
 import Link from 'next/link'
-import { LOCAL_STORAGE_TOKEN } from 'shared/constants'
 import { useRouter } from 'next/router'
-import { route } from 'next/dist/server/router'
+import { useSelector } from 'react-redux'
+import Image from 'next/image'
 
 const MyHeader = () => {
-  const router = useRouter()
-  const [isLogin, setIsLogin] = useState(false)
-  if (typeof window !== 'undefined') {
-    let login = !!localStorage.getItem(LOCAL_STORAGE_TOKEN)
-    login !== isLogin && setIsLogin(login)
-  }
+  const { pathname } = useRouter()
+  const token = useSelector((state) => state.user.token)
 
   return (
     <Layout.Header>
-      <Menu mode="horizontal">
+      <Link href="/">
+        <a className="header-logo">
+          <img src="/images/logo.png" width={52} height={29} alt="logo" />
+        </a>
+      </Link>
+      <Menu mode="horizontal" selectedKeys={[pathname]} className="header-menu">
         <Menu.Item key="/">
           <Link href="/">Trang chủ</Link>
         </Menu.Item>
       </Menu>
-      {isLogin ? (
-        <Menu mode="horizontal">
-          <Menu.SubMenu icon={<UserOutlined />}>
+      {token ? (
+        <Menu mode="horizontal" selectedKeys={[]}>
+          <Menu.SubMenu icon={<UserOutlined className="mr-0" />}>
             <Menu.Item key="/profile">
               <Link href="/profile">Thông tin cá nhân</Link>
             </Menu.Item>
@@ -31,16 +32,16 @@ const MyHeader = () => {
               <Link href="/package">Gói đang sở hữu</Link>
             </Menu.Item>
             <Menu.Item key="/history">
-              <Link href="/history">Lịch sử</Link>
+              <Link href="/history">Lịch sử xuất báo cáo</Link>
             </Menu.Item>
           </Menu.SubMenu>
         </Menu>
       ) : (
-        <Space size="large">
-          <Link href={`/login?next=${encodeURIComponent(router.pathname)}`}>
+        <Space className="auth-space" size="large">
+          <Link href={`/login?next=${encodeURIComponent(pathname)}`}>
             <a>Đăng nhập</a>
           </Link>
-          <Link href={`/register?next=${encodeURIComponent(router.pathname)}`}>
+          <Link href={`/register?next=${encodeURIComponent(pathname)}`}>
             <a>Đăng ký</a>
           </Link>
         </Space>

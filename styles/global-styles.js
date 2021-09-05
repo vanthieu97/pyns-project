@@ -43,11 +43,17 @@ export default css.global`
   .w-100 {
     width: 100%;
   }
+  .mr-0 {
+    margin-right: 0 !important;
+  }
   .mt-8 {
     margin-top: 8px;
   }
   .mt-12 {
     margin-top: 12px;
+  }
+  .mb-12 {
+    margin-bottom: 12px;
   }
   .my-16 {
     margin-top: 16px;
@@ -56,10 +62,43 @@ export default css.global`
   .mt-40 {
     margin-top: 40px;
   }
+  .pb-12 {
+    padding-bottom: 12px;
+  }
   .form-wrapper {
     max-width: 500px;
     margin-left: auto;
     margin-right: auto;
+  }
+  .ant-layout-header {
+    position: relative;
+  }
+  .header-logo {
+    @media (max-width: 576px) {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+  .header-menu {
+    flex: auto;
+    @media (max-width: 576px) {
+      flex: unset;
+      li.ant-menu-submenu .ant-menu-submenu-title span:first-child {
+        display: inline-block;
+        width: 25px;
+        color: transparent;
+        background: url(/images/hamburger.png) center center no-repeat no-repeat;
+        background-size: contain;
+      }
+    }
+  }
+  .auth-space {
+    @media (max-width: 576px) {
+      .ant-space-item:not(:last-child) {
+        margin-right: 8px !important;
+      }
+    }
   }
 
   /* Overwrite AntD styles */
@@ -123,5 +162,10 @@ export default css.global`
   }
   .ant-input-affix-wrapper .ant-input {
     border-radius: 0 !important;
+  }
+  .ant-form-item-label {
+    @media (max-width: 576px) {
+      padding-bottom: 0 !important;
+    }
   }
 `

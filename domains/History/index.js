@@ -7,10 +7,10 @@ const History = () => {
   return (
     <div>
       <Head>
-        <title>Gói đã mua</title>
+        <title>Lịch sử xuất báo cáo</title>
       </Head>
       <Typography.Title level={4} className="text-center">
-        Danh sách gói đã mua
+        Lịch sửa xuất báo cáo
       </Typography.Title>
       <Typography.Text>Số kết quả: {2}</Typography.Text>
       <Table
@@ -20,7 +20,11 @@ const History = () => {
         pagination={false}
         columns={columns}
         dataSource={new Array(15)
-          .fill({ name: 'Gói ', bought_date: '2021-09-02T19:05:42.005Z', quantity: 5, used: 3, remain: 2 })
+          .fill({
+            export_date: '2021-09-02T19:05:42.005Z',
+            name: 'Nguyễn Văn ',
+            date_of_birth: '1999-09-02T19:05:42.005Z',
+          })
           .map(({ name, ...rest }, id) => ({ id: id + 1, name: name + (id + 1), ...rest }))}
         scroll={{ x: 576 }}
       />

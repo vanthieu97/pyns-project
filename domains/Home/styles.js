@@ -2,11 +2,9 @@ import css from 'styled-jsx/css'
 
 /*language=SCSS*/
 export default css`
-  h1 {
-    color: red;
-  }
-
-  .test-logo {
-    margin: 15px 0;
+  :global(.export-form-wrapper) {
+    @media (max-width: 992px) {
+      margin-top: 20px;
+    }
   }
 `

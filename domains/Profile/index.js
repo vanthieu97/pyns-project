@@ -7,7 +7,11 @@ const { Title } = Typography
 const Profile = () => {
   const [form] = Form.useForm()
 
-  const onClickSubmit = () => {}
+  const onClickSubmit = () => {
+    form.validateFields().then((values) => {
+      console.log(values)
+    })
+  }
 
   return (
     <div className="form-wrapper">
