@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import dynamic from 'next/dynamic'
 import { Provider } from 'react-redux'
 import Head from 'next/head'
@@ -9,6 +9,10 @@ import globalStyles from 'styles/global-styles'
 const Layout = dynamic(() => import('layout'))
 
 const MyApp = ({ Component, pageProps }) => {
+  useEffect(() => {
+    console.log('OKE')
+  }, [])
+
   return (
     <>
       <Head>

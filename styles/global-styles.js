@@ -53,16 +53,16 @@ export default css.global`
     margin-top: 16px;
     margin-bottom: 16px;
   }
+  .mt-40 {
+    margin-top: 40px;
+  }
+  .form-wrapper {
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 
   /* Overwrite AntD styles */
-  .ant-layout-content {
-    margin: 0 16px;
-  }
-
-  .ant-breadcrumb {
-    margin: 16px 0;
-  }
-
   .ant-menu-submenu-popup {
     .ant-menu-sub {
       background-color: #fff !important;
@@ -85,32 +85,43 @@ export default css.global`
 
   .wrapper {
     height: 100vh;
-    overflow: auto;
-    .top-header {
+    overflow: hidden auto;
+    background: #fff;
+    .ant-layout-header {
       background: #fff;
+      display: flex;
+      justify-content: space-between;
+      box-shadow: 0 2px 8px 0 rgb(0 0 0 / 15%);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: 48px;
+      line-height: 48px;
       @media (max-width: 768px) {
         padding: 0 20px;
       }
-      display: flex;
-      .top-menu {
+      .ant-menu {
         border-bottom-color: #fff;
       }
     }
-    .main-content {
-      min-height: 360px;
-      background-color: #fff;
-      padding: 10px 20px;
+    .ant-breadcrumb {
+      margin: 12px 0;
     }
-  }
-  .form-wrapper {
-    max-width: 500px;
-    margin-left: auto;
-    margin-right: auto;
+    .ant-layout-content {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 12px;
+    }
   }
   .ant-btn,
   .ant-input,
   .ant-picker,
-  .ant-select-selector {
+  .ant-select-selector,
+  .ant-input-affix-wrapper {
     border-radius: 5px !important;
+  }
+  .ant-input-affix-wrapper .ant-input {
+    border-radius: 0 !important;
   }
 `

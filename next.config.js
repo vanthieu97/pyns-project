@@ -5,15 +5,15 @@ const subPath = '/nextjs-blank'
 const variables = {
   development: {
     BASE_URL: '',
-    BASE_API_URL: ``,
+    API_URL: 'https://khoanguyenxuan.dev/pythagoras',
   },
   test: {
     BASE_URL: '',
-    BASE_API_URL: ``,
+    API_URL: 'https://khoanguyenxuan.dev/pythagoras',
   },
   live: {
     BASE_URL: '',
-    BASE_API_URL: ``,
+    API_URL: 'https://khoanguyenxuan.dev/pythagoras',
   },
 }[customENV]
 
