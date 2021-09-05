@@ -1,10 +1,12 @@
 {
-  "name": "nextjs-blank",
-  "version": "2.4.0",
+  "name": "pysn-fe",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "ENV_ARG=development next dev",
-    "build": "next telemetry disable && next build",
+    "build-local": "next telemetry disable && next build",
+    "start:local": "next start",
+    "build": "next build",
     "start": "next start -p $PORT"
   },
   "devDependencies": {
