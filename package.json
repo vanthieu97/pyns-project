@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "ENV_ARG=development next dev",
-    "build": "next telemetry disable && next build",
+    "build": "next build",
     "start:local": "next start",
     "start": "next start -p $PORT"
   },
