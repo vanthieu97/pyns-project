@@ -23,7 +23,7 @@ const nextConfig = {
     ENV_ARG: customENV,
     DEBUG: process.env.DEBUG && process.env.DEBUG === 'true',
   },
-  // distDir: 'build',
+  distDir: 'build',
   // basePath: customENV !== 'development' ? subPath : '',
   // assetPrefix: customENV !== 'development' ? process.env.STATIC_URL : '',
   // generateBuildId: customENV,
