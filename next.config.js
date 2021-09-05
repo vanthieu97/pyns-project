@@ -27,6 +27,7 @@ const nextConfig = {
   // basePath: customENV !== 'development' ? subPath : '',
   // assetPrefix: customENV !== 'development' ? process.env.STATIC_URL : '',
   // generateBuildId: customENV,
+  generateBuildId: 'production',
   // poweredByHeader: false,
   // images: {
   //   domains: ['', ''],
