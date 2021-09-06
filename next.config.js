@@ -1,7 +1,6 @@
 const withAntdLess = require('next-plugin-antd-less')
 
-const customENV = process.env.ENV_ARG
-const subPath = '/nextjs-blank'
+const customENV = process.env.ENV_ARG || 'production'
 const variables = {
   development: {
     BASE_URL: '',
@@ -11,7 +10,7 @@ const variables = {
     BASE_URL: '',
     API_URL: 'https://khoanguyenxuan.dev/pythagoras',
   },
-  live: {
+  production: {
     BASE_URL: '',
     API_URL: 'https://khoanguyenxuan.dev/pythagoras',
   },
