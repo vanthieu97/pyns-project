@@ -1,10 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Layout, Menu, Space } from 'antd'
-import { HomeOutlined, UserOutlined } from '@ant-design/icons'
+import { UserOutlined } from '@ant-design/icons'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useSelector } from 'react-redux'
-import Image from 'next/image'
 
 const MyHeader = () => {
   const { pathname } = useRouter()

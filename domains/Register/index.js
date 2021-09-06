@@ -66,19 +66,19 @@ const Register = () => {
       </Title>
       <UserForm
         form={form}
-        initialValues={{
-          name: 'Nguyễn Văn A',
-          user_type: 'personal',
-          email: 'nguyenvana@gmail.com',
-          phone: '0928033208',
-          gender: 'male',
-          date_of_birth: moment('12-02-1997', BE_DATE_FORMAT),
-          city: 'Thành phố Hồ Chí Minh',
-          district: 'Huyện Bình Chánh',
-          address: 'Somewhere',
-          password: '123',
-          confirm_password: '123',
-        }}
+        // initialValues={{
+        //   name: 'Nguyễn Văn A',
+        //   user_type: 'personal',
+        //   email: 'nguyenvana@gmail.com',
+        //   phone: '0928033208',
+        //   gender: 'male',
+        //   date_of_birth: moment('12-02-1997', BE_DATE_FORMAT),
+        //   city: 'Thành phố Hồ Chí Minh',
+        //   district: 'Huyện Bình Chánh',
+        //   address: 'Somewhere',
+        //   password: '123',
+        //   confirm_password: '123',
+        // }}
       />
       <div className="text-center">
         <Button type="primary" onClick={onClickSubmit} className="mt-8" size="large">
