@@ -1,9 +1,47 @@
-import { Table, Typography } from 'antd'
+import { message, Table, Typography } from 'antd'
 import Head from 'next/head'
-import React from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
+import { useGetReportsQuery } from 'redux/pynsAPIs'
+import { DEFAULT_LIMIT } from 'shared/constants'
+import { getErrorMessage } from 'shared/utility'
 import columns from './columns'
 
 const History = () => {
+  const [offset, setOffset] = useState(0)
+  const [limit, setLimit] = useState(DEFAULT_LIMIT)
+
+  const {
+    data: getReportsData,
+    error: getReportsError,
+    isFetching: getReportsLoading,
+  } = useGetReportsQuery({ offset, limit })
+
+  useEffect(() => {
+    if (getReportsError) {
+      message.error(getErrorMessage(getReportsError))
+    }
+  }, [getReportsError])
+
+  const pagination = useMemo(() => {
+    if (getReportsData) {
+      return {
+        pageSize: getReportsData.limit,
+        total: getReportsData.total,
+        current: Math.floor(offset / limit) + 1,
+        pageSizeOptions: [10, 20, 50],
+      }
+    }
+  }, [getReportsData])
+
+  const changeTableHandler = (pagination) => {
+    const newOffset = limit * (pagination.current - 1)
+    if (newOffset !== offset) {
+      setOffset(newOffset)
+    } else if (pagination.pageSize !== limit) {
+      setLimit(pagination.pageSize)
+    }
+  }
+
   return (
     <div>
       <Head>
@@ -17,16 +55,18 @@ const History = () => {
         size="small"
         className="mt-12"
         rowKey="id"
-        pagination={false}
+        loading={getReportsLoading}
+        pagination={pagination}
         columns={columns}
         dataSource={new Array(15)
           .fill({
-            export_date: '2021-09-02T19:05:42.005Z',
+            created_at: '2021-09-02T19:05:42.005Z',
             name: 'Nguyễn Văn ',
-            date_of_birth: '1999-09-02T19:05:42.005Z',
+            date_of_birth: '21-09-2021',
           })
           .map(({ name, ...rest }, id) => ({ id: id + 1, name: name + (id + 1), ...rest }))}
         scroll={{ x: 576 }}
+        onChange={changeTableHandler}
       />
     </div>
   )

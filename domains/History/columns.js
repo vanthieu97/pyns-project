@@ -10,7 +10,7 @@ export default [
   },
   {
     title: 'Thời gian xuất',
-    dataIndex: 'export_date',
+    dataIndex: 'created_at',
     align: 'center',
     render: (value) => moment(value).format(DATE_FORMAT),
   },

@@ -31,16 +31,51 @@ const registerQuery = (params) => ({
   body: params,
 })
 
+const getUserQuery = () => ({
+  method: 'post',
+  url: `/user/get_info/`,
+})
+
+const updateUserQuery = (params) => ({
+  method: 'post',
+  url: `/user/update/`,
+  body: params,
+})
+
 const getMyPacksQuery = (params) => ({
   method: 'post',
   url: `/user/get_my_packs/`,
   body: params,
 })
 
+const getListPacksQuery = (params) => ({
+  method: 'post',
+  url: `/user/get_list_packs/`,
+  body: params,
+})
+
+const purchasePackQuery = (params) => ({
+  method: 'post',
+  url: `/user/purchase_pack/`,
+  body: params,
+})
+
+const generateReportQuery = (params) => ({
+  method: 'post',
+  url: `/user/generate_report/`,
+  body: params,
+})
+
+const getReportsQuery = (params) => ({
+  method: 'post',
+  url: `/user/get_reports/`,
+  body: params,
+})
+
 export const pynsAPIs = createApi({
   baseQuery,
   reducerPath: 'pynsAPIs',
-  tagTypes: ['GetMyPacks'],
+  tagTypes: ['GetMyPacks', 'User'],
   endpoints: (build) => ({
     login: build.mutation({
       query: loginQuery,
@@ -55,10 +90,36 @@ export const pynsAPIs = createApi({
       query: registerQuery,
       transformResponse,
     }),
+    getUser: build.query({
+      query: getUserQuery,
+      transformResponse,
+      providesTags: ['User'],
+    }),
+    updateUser: build.mutation({
+      query: updateUserQuery,
+      transformResponse,
+      invalidatesTags: (result) => result && ['User'],
+    }),
     getMyPacks: build.query({
       query: getMyPacksQuery,
       transformResponse,
       providesTags: [{ type: 'GetMyPacks', id: 'LIST' }],
+    }),
+    getListPacks: build.query({
+      query: getListPacksQuery,
+      transformResponse,
+    }),
+    purchasePack: build.mutation({
+      query: purchasePackQuery,
+      transformResponse,
+    }),
+    generateReport: build.mutation({
+      query: generateReportQuery,
+      transformResponse,
+    }),
+    getReports: build.query({
+      query: getReportsQuery,
+      transformResponse,
     }),
   }),
 })
@@ -71,4 +132,14 @@ export const {
   usePrefetch: usePrefetchPyns,
 } = pynsAPIs
 
-export const { useLoginMutation, useRegisterMutation, useGetMyPacksQuery } = pynsAPIs
+export const {
+  useLoginMutation,
+  useRegisterMutation,
+  useGetUserQuery,
+  useUpdateUserMutation,
+  useGetMyPacksQuery,
+  useGetListPacksQuery,
+  usePurchasePackMutation,
+  useGenerateReportMutation,
+  useGetReportsQuery,
+} = pynsAPIs

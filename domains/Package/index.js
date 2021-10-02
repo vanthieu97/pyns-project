@@ -1,6 +1,6 @@
 import { message, Table, Typography } from 'antd'
 import Head from 'next/head'
-import React, { useMemo, useState, useEffect } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useGetMyPacksQuery } from 'redux/pynsAPIs'
 import { DEFAULT_LIMIT } from 'shared/constants'
 import { getErrorMessage } from 'shared/utility'
@@ -55,7 +55,7 @@ const Package = () => {
         pagination={false}
         columns={columns}
         dataSource={new Array(15)
-          .fill({ name: 'Gói ', bought_date: '2021-09-02T19:05:42.005Z', quantity: 5, used: 3, remain: 2 })
+          .fill({ pack_name: 'Gói ', purchased_at: "05-09-2021", pack_quantity: 4, used_quantity: 3, remaining_quantity: 2, price: 1000000, status: 'Active' })
           .map(({ name, ...rest }, id) => ({ id: id + 1, name: name + (id + 1), ...rest }))}
         scroll={{ x: 576 }}
         pagination={pagination}

@@ -1,18 +1,23 @@
-import React from 'react'
+import { Button, Col, DatePicker, Form, Input, Row, Typography } from 'antd'
 import Head from 'next/head'
-import styles from './styles'
-import { Col, Row, Typography, Form, Input, DatePicker, Button } from 'antd'
-import { DATE_FORMAT } from 'shared/constants'
+import React from 'react'
 import { useSelector } from 'react-redux'
+import { useGenerateReportMutation } from 'redux/pynsAPIs'
+import { BE_DATE_FORMAT, DATE_FORMAT } from 'shared/constants'
+import styles from './styles'
 
 const { Item } = Form
 
 const Home = () => {
   const [form] = Form.useForm()
   const token = useSelector((state) => state.user.token)
+  const [generateReport, { data, error, isLoading: loading }] = useGenerateReportMutation()
 
   const onClickExport = () => {
-    form.validateFields().then((values) => console.log(values))
+    form.validateFields().then((values) => {
+      const { name, date_of_birth } = values
+      generateReport({ name, date_of_birth: date_of_birth.format(BE_DATE_FORMAT) })
+    })
   }
 
   return (
@@ -37,7 +42,7 @@ const Home = () => {
                 <Input placeholder="Nhập họ tên" />
               </Item>
               <Item
-                name="birthday"
+                name="date_of_birth"
                 label="Ngày sinh"
                 required
                 rules={[{ required: true, message: 'Vui lòng chọn ngày sinh' }]}

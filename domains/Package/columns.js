@@ -9,27 +9,37 @@ export default [
   },
   {
     title: 'Tên gói',
-    dataIndex: 'name',
+    dataIndex: 'pack_name',
   },
   {
     title: 'Thời gian mua',
-    dataIndex: 'bought_date',
+    dataIndex: 'purchased_at',
     align: 'center',
     render: (value) => moment(value).format(DATE_FORMAT),
   },
   {
     title: 'Số lượng mua',
-    dataIndex: 'quantity',
+    dataIndex: 'pack_quantity',
+    align: 'center',
+  },
+  {
+    title: 'Giá mua',
+    dataIndex: 'price',
+    align: 'center',
+  },
+  {
+    title: 'Trạng thái',
+    dataIndex: 'status',
     align: 'center',
   },
   {
     title: 'Đã dùng',
-    dataIndex: 'used',
+    dataIndex: 'used_quantity',
     align: 'center',
   },
   {
     title: 'Còn lại',
-    dataIndex: 'remain',
+    dataIndex: 'remaining_quantity',
     align: 'center',
   },
 ]

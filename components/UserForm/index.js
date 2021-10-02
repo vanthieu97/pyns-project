@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import { Form, Input, Radio, Select, DatePicker } from 'antd'
+import { DatePicker, Form, Input, Radio, Select } from 'antd'
 import PropTypes from 'prop-types'
-import { PROVINCES } from 'shared/provinces'
+import React, { useEffect, useState } from 'react'
 import { DATE_FORMAT, PHONE_REGEX } from 'shared/constants'
+import { PROVINCES } from 'shared/provinces'
 
 const { Item } = Form
 
