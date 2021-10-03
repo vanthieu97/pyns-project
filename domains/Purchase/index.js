@@ -51,7 +51,7 @@ const Purchase = () => {
         </Item>
         <div className="text-center">
           <Button type="primary" ghost onClick={onClickPurchase} className="mt-8" loading={purrchasePackLoading}>
-            Xuất báo cáo
+            Mua gói
           </Button>
         </div>
       </Form>
