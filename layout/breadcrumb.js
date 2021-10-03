@@ -1,13 +1,14 @@
-import React from 'react'
 import { Breadcrumb } from 'antd'
-import { useRouter } from 'next/router'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
+import React from 'react'
 
 const breadcrumbNameMap = {
   '/login': 'Đăng nhập',
   '/register': 'Đăng ký',
   '/profile': 'Thông tin cá nhân',
   '/package': 'Gói đã sở hữu',
+  '/purchase': 'Mua gói',
   '/history': 'Lịch sử xuất báo cáo',
 }
 

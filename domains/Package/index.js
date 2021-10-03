@@ -1,5 +1,6 @@
-import { message, Table, Typography } from 'antd'
+import { Button, Col, message, Row, Table, Typography } from 'antd'
 import Head from 'next/head'
+import Link from 'next/link'
 import React, { useEffect, useMemo, useState } from 'react'
 import { useGetMyPacksQuery } from 'redux/pynsAPIs'
 import { DEFAULT_LIMIT } from 'shared/constants'
@@ -46,17 +47,24 @@ const Package = () => {
       <Typography.Title level={4} className="text-center">
         Danh sách gói đã mua
       </Typography.Title>
-      <Typography.Text>Số kết quả: {2}</Typography.Text>
+      <Row justify="space-between">
+        <Col>
+          <Typography.Text>Số kết quả: {data?.total}</Typography.Text>
+        </Col>
+        <Col>
+          <Link href="/purchase">
+            <Button type="primary">Mua gói</Button>
+          </Link>
+        </Col>
+      </Row>
       <Table
         size="small"
         className="mt-12"
-        rowKey="id"
+        rowKey="pack_code"
         loading={loading}
         pagination={false}
         columns={columns}
-        dataSource={new Array(15)
-          .fill({ pack_name: 'Gói ', purchased_at: "05-09-2021", pack_quantity: 4, used_quantity: 3, remaining_quantity: 2, price: 1000000, status: 'Active' })
-          .map(({ name, ...rest }, id) => ({ id: id + 1, name: name + (id + 1), ...rest }))}
+        dataSource={data?.records}
         scroll={{ x: 576 }}
         pagination={pagination}
         onChange={changeTableHandler}

@@ -1,9 +1,10 @@
-import { Button, Col, DatePicker, Form, Input, Row, Typography } from 'antd'
+import { Button, Col, DatePicker, Form, Input, message, Row, Typography } from 'antd'
 import Head from 'next/head'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useGenerateReportMutation } from 'redux/pynsAPIs'
 import { BE_DATE_FORMAT, DATE_FORMAT } from 'shared/constants'
+import { getErrorMessage } from 'shared/utility'
 import styles from './styles'
 
 const { Item } = Form
@@ -12,6 +13,12 @@ const Home = () => {
   const [form] = Form.useForm()
   const token = useSelector((state) => state.user.token)
   const [generateReport, { data, error, isLoading: loading }] = useGenerateReportMutation()
+
+  useEffect(() => {
+    if (error) {
+      message.error(getErrorMessage(error))
+    }
+  }, [error])
 
   const onClickExport = () => {
     form.validateFields().then((values) => {

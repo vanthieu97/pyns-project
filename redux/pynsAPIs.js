@@ -48,10 +48,10 @@ const getMyPacksQuery = (params) => ({
   body: params,
 })
 
-const getListPacksQuery = (params) => ({
+const getListPacksQuery = () => ({
   method: 'post',
   url: `/user/get_list_packs/`,
-  body: params,
+  body: { offset: 0, limit: 100 },
 })
 
 const purchasePackQuery = (params) => ({
@@ -112,10 +112,12 @@ export const pynsAPIs = createApi({
     purchasePack: build.mutation({
       query: purchasePackQuery,
       transformResponse,
+      invalidatesTags: (result) => result && ['GetMyPacks'],
     }),
     generateReport: build.mutation({
       query: generateReportQuery,
       transformResponse,
+      invalidatesTags: (result) => result && ['GetMyPacks'],
     }),
     getReports: build.query({
       query: getReportsQuery,

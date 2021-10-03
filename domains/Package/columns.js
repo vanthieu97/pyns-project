@@ -39,7 +39,7 @@ export default [
   },
   {
     title: 'Còn lại',
-    dataIndex: 'remaining_quantity',
+    dataIndex: 'remain_quantity',
     align: 'center',
   },
 ]
