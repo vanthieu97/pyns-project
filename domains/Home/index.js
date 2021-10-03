@@ -15,6 +15,13 @@ const Home = () => {
   const [generateReport, { data, error, isLoading: loading }] = useGenerateReportMutation()
 
   useEffect(() => {
+    if (data) {
+      message.success('Tạo báo cáo thành công')
+      exportReport(data.pdf)
+    }
+  }, [data])
+
+  useEffect(() => {
     if (error) {
       message.error(getErrorMessage(error))
     }
@@ -57,7 +64,7 @@ const Home = () => {
                 <DatePicker className="w-100" format={DATE_FORMAT} placeholder="Chọn ngày sinh" />
               </Item>
               <div className="text-center">
-                <Button type="primary" ghost onClick={onClickExport} className="mt-8">
+                <Button type="primary" ghost onClick={onClickExport} className="mt-8" loading={loading}>
                   Xuất báo cáo
                 </Button>
               </div>

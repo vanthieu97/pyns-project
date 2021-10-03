@@ -5,14 +5,17 @@ const variables = {
   development: {
     BASE_URL: '',
     API_URL: 'https://khoanguyenxuan.dev/pythagoras',
+    EXPORT_URL: 'https://khoanguyenxuan.dev/pythagoras/user/report',
   },
   test: {
     BASE_URL: '',
     API_URL: 'https://khoanguyenxuan.dev/pythagoras',
+    EXPORT_URL: 'https://khoanguyenxuan.dev/pythagoras/user/report',
   },
   production: {
     BASE_URL: '',
     API_URL: 'https://khoanguyenxuan.dev/pythagoras',
+    EXPORT_URL: 'https://khoanguyenxuan.dev/pythagoras/user/report',
   },
 }[customENV]
 

@@ -1,10 +1,10 @@
 import moment from 'moment'
-import { DATE_FORMAT } from 'shared/constants'
+import { BE_DATE_FORMAT, DATE_FORMAT } from 'shared/constants'
 
 export default [
   {
     title: 'STT',
-    dataIndex: 'id',
+    dataIndex: 'key',
     align: 'center',
   },
   {
@@ -15,7 +15,7 @@ export default [
     title: 'Thời gian mua',
     dataIndex: 'purchased_at',
     align: 'center',
-    render: (value) => moment(value).format(DATE_FORMAT),
+    render: (value) => moment(value, BE_DATE_FORMAT).format(DATE_FORMAT),
   },
   {
     title: 'Số lượng mua',

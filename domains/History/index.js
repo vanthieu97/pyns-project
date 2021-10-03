@@ -3,7 +3,7 @@ import Head from 'next/head'
 import React, { useEffect, useMemo, useState } from 'react'
 import { useGetReportsQuery } from 'redux/pynsAPIs'
 import { DEFAULT_LIMIT } from 'shared/constants'
-import { getErrorMessage } from 'shared/utility'
+import { exportReport, getErrorMessage } from 'shared/utility'
 import columns from './columns'
 
 const History = () => {
@@ -15,6 +15,7 @@ const History = () => {
     error: getReportsError,
     isFetching: getReportsLoading,
   } = useGetReportsQuery({ offset, limit })
+  const { records } = getReportsData ?? {}
 
   useEffect(() => {
     if (getReportsError) {
@@ -42,6 +43,11 @@ const History = () => {
     }
   }
 
+  const onClickDownload = (value) => {
+    const selectedRecord = records.find(({ id }) => id === value)
+    selectedRecord && exportReport(selectedRecord.pdf)
+  }
+
   return (
     <div>
       <Head>
@@ -57,14 +63,8 @@ const History = () => {
         rowKey="id"
         loading={getReportsLoading}
         pagination={pagination}
-        columns={columns}
-        dataSource={new Array(15)
-          .fill({
-            created_at: '2021-09-02T19:05:42.005Z',
-            name: 'Nguyễn Văn ',
-            date_of_birth: '21-09-2021',
-          })
-          .map(({ name, ...rest }, id) => ({ id: id + 1, name: name + (id + 1), ...rest }))}
+        columns={columns(onClickDownload)}
+        dataSource={records}
         scroll={{ x: 576 }}
         onChange={changeTableHandler}
       />

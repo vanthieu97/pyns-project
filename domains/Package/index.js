@@ -10,8 +10,15 @@ import columns from './columns'
 const Package = () => {
   const [offset, setOffset] = useState(0)
   const [limit, setLimit] = useState(DEFAULT_LIMIT)
+  const [dataList, setDataList] = useState([])
 
   const { data, error, isFetching: loading } = useGetMyPacksQuery({ offset, limit })
+
+  useEffect(() => {
+    if (data) {
+      setDataList(data.records.map((record, index) => ({ key: index, ...record })))
+    }
+  }, [data])
 
   useEffect(() => {
     if (error) {
@@ -60,11 +67,10 @@ const Package = () => {
       <Table
         size="small"
         className="mt-12"
-        rowKey="pack_code"
         loading={loading}
         pagination={false}
         columns={columns}
-        dataSource={data?.records}
+        dataSource={dataList}
         scroll={{ x: 576 }}
         pagination={pagination}
         onChange={changeTableHandler}
