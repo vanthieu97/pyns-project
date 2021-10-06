@@ -32,7 +32,7 @@ export default [
     title: 'Giá mua',
     dataIndex: 'purchased_price',
     align: 'center',
-    render: (value) => (value ?? '').toLocaleString('en-IN'),
+    render: (value) => (value ?? '').toLocaleString(),
   },
   {
     title: 'Trạng thái',
