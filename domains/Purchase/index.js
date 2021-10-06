@@ -9,6 +9,7 @@ const Purchase = () => {
   const [form] = Form.useForm()
 
   const { data: getListPacksData, error: getListPacksError, isFetching: getListPacksLoading } = useGetListPacksQuery()
+
   const [purchasePack, { isSuccess: purchasePackSuccess, error: purchasePackError, isLoading: purrchasePackLoading }] =
     usePurchasePackMutation()
 

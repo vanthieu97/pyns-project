@@ -16,7 +16,7 @@ const Package = () => {
 
   useEffect(() => {
     if (data) {
-      setDataList(data.records.map((record, index) => ({ key: index, ...record })))
+      setDataList(data.records.map((record, index) => ({ key: index + 1, ...record })))
     }
   }, [data])
 

@@ -3,7 +3,7 @@ import Head from 'next/head'
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useGenerateReportMutation } from 'redux/pynsAPIs'
-import { BE_DATE_FORMAT, DATE_FORMAT } from 'shared/constants'
+import { BE_DATE_FORMAT, DATE_FORMAT, PHONE_REGEX } from 'shared/constants'
 import { getErrorMessage } from 'shared/utility'
 import styles from './styles'
 
@@ -17,7 +17,7 @@ const Home = () => {
   useEffect(() => {
     if (data) {
       message.success('Tạo báo cáo thành công')
-      exportReport(data.pdf)
+      window.open(data.pdf)
     }
   }, [data])
 
@@ -29,8 +29,8 @@ const Home = () => {
 
   const onClickExport = () => {
     form.validateFields().then((values) => {
-      const { name, date_of_birth } = values
-      generateReport({ name, date_of_birth: date_of_birth.format(BE_DATE_FORMAT) })
+      const { date_of_birth, ...rest } = values
+      generateReport({ ...rest, date_of_birth: date_of_birth.format(BE_DATE_FORMAT) })
     })
   }
 
@@ -51,7 +51,7 @@ const Home = () => {
         </Col>
         {token && (
           <Col span={24} lg={8} className="export-form-wrapper">
-            <Form form={form} labelCol={{ span: 6 }} labelAlign="left" className="form-wrapper">
+            <Form form={form} labelCol={{ span: 8 }} labelAlign="left" className="form-wrapper">
               <Item name="name" label="Họ tên" required rules={[{ required: true, message: 'Vui lòng nhập họ tên' }]}>
                 <Input placeholder="Nhập họ tên" />
               </Item>
@@ -62,6 +62,29 @@ const Home = () => {
                 rules={[{ required: true, message: 'Vui lòng chọn ngày sinh' }]}
               >
                 <DatePicker className="w-100" format={DATE_FORMAT} placeholder="Chọn ngày sinh" />
+              </Item>
+              <Item
+                name="phone"
+                required
+                rules={[
+                  {
+                    validator(_, value) {
+                      if (value && !PHONE_REGEX.test(value)) {
+                        return Promise.reject('Số điện thoại không hợp lệ')
+                      }
+                      return Promise.resolve()
+                    },
+                  },
+                ]}
+                label="Số điện thoại"
+              >
+                <Input placeholder="Nhập số điện thoại" />
+              </Item>
+              <Item name="email" label="Email" rules={[{ type: 'email', message: 'Vui lòng nhập email hợp lệ' }]}>
+                <Input placeholder="Nhập email" />
+              </Item>
+              <Item name="address" label="Địa chỉ">
+                <Input placeholder="Nhập địa chỉ" />
               </Item>
               <div className="text-center">
                 <Button type="primary" ghost onClick={onClickExport} className="mt-8" loading={loading}>

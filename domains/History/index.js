@@ -54,7 +54,7 @@ const History = () => {
         <title>Lịch sử xuất báo cáo</title>
       </Head>
       <Typography.Title level={4} className="text-center">
-        Lịch sửa xuất báo cáo
+        Lịch sử xuất báo cáo
       </Typography.Title>
       <Typography.Text>Số kết quả: {2}</Typography.Text>
       <Table

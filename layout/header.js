@@ -1,13 +1,21 @@
-import React from 'react'
-import { Layout, Menu, Space } from 'antd'
 import { UserOutlined } from '@ant-design/icons'
+import { Layout, Menu, Space } from 'antd'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useSelector } from 'react-redux'
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { resetUser } from 'redux/user'
+import { LOCAL_STORAGE_TOKEN } from 'shared/constants'
 
 const MyHeader = () => {
+  const dispatch = useDispatch()
   const { pathname } = useRouter()
   const token = useSelector((state) => state.user.token)
+
+  const onClickLogout = () => {
+    localStorage.setItem(LOCAL_STORAGE_TOKEN, '')
+    dispatch(resetUser())
+  }
 
   return (
     <Layout.Header>
@@ -32,6 +40,9 @@ const MyHeader = () => {
             </Menu.Item>
             <Menu.Item key="/history">
               <Link href="/history">Lịch sử xuất báo cáo</Link>
+            </Menu.Item>
+            <Menu.Item key="/logout" onClick={onClickLogout}>
+              Đăng xuất
             </Menu.Item>
           </Menu.SubMenu>
         </Menu>

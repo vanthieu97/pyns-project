@@ -2,6 +2,7 @@ import { Button, Form, message, Typography } from 'antd'
 import UserForm from 'components/UserForm'
 import moment from 'moment'
 import Head from 'next/head'
+import Router from 'next/router'
 import React, { useEffect } from 'react'
 import { useGetUserQuery, useUpdateUserMutation } from 'redux/pynsAPIs'
 import { BE_DATE_FORMAT } from 'shared/constants'
@@ -30,6 +31,7 @@ const Profile = () => {
   useEffect(() => {
     if (updateUserSuccess) {
       message.success('Cập nhật thành công')
+      Router.reload(window.location.pathname)
     }
   }, [updateUserSuccess])
 

@@ -1,14 +1,13 @@
-import React, { useEffect } from 'react'
-import Link from 'next/link'
-import Head from 'next/head'
-import { Typography, Form, Button, Divider, message } from 'antd'
+import { Button, Divider, Form, message, Typography } from 'antd'
 import UserForm from 'components/UserForm'
+import Head from 'next/head'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import React, { useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import { useRegisterMutation } from 'redux/pynsAPIs'
-import moment from 'moment'
 import { BE_DATE_FORMAT } from 'shared/constants'
 import { getErrorMessage } from 'shared/utility'
-import { useRouter } from 'next/router'
-import { useSelector } from 'react-redux'
 
 const { Title } = Typography
 
@@ -17,10 +16,8 @@ const Register = () => {
   const router = useRouter()
   const token = useSelector((state) => state.user.token)
 
-  const [
-    register,
-    { isSuccess: registerSuccess, error: registerError, isFetching: registerLoading },
-  ] = useRegisterMutation()
+  const [register, { isSuccess: registerSuccess, error: registerError, isFetching: registerLoading }] =
+    useRegisterMutation()
 
   useEffect(() => {
     if (router.isReady && token) {
@@ -48,7 +45,7 @@ const Register = () => {
 
   const onClickSubmit = () => {
     form.validateFields().then((values) => {
-      const { name, confirm_password, date_of_birth, ...rest } = values
+      const { confirm_password, date_of_birth, ...rest } = values
       register({
         ...rest,
         date_of_birth: date_of_birth.format(BE_DATE_FORMAT),

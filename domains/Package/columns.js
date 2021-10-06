@@ -1,6 +1,12 @@
 import moment from 'moment'
 import { BE_DATE_FORMAT, DATE_FORMAT } from 'shared/constants'
 
+const statusNameMapping = {
+  not_confirmed: 'Chờ xác nhận',
+  confirmed: 'Đã xác nhận',
+  cancelled: 'Đã hủy',
+}
+
 export default [
   {
     title: 'STT',
@@ -19,18 +25,20 @@ export default [
   },
   {
     title: 'Số lượng mua',
-    dataIndex: 'pack_quantity',
+    dataIndex: 'total_quantity',
     align: 'center',
   },
   {
     title: 'Giá mua',
-    dataIndex: 'price',
+    dataIndex: 'purchased_price',
     align: 'center',
+    render: (value) => (value ?? '').toLocaleString('en-IN'),
   },
   {
     title: 'Trạng thái',
     dataIndex: 'status',
     align: 'center',
+    render: (value) => statusNameMapping[value],
   },
   {
     title: 'Đã dùng',

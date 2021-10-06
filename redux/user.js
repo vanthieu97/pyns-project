@@ -8,7 +8,7 @@ const userSlice = createSlice({
       state.token = payload
     },
     setUser: (_state, { payload }) => payload,
-    resetUser: () => {},
+    resetUser: () => ({}),
   },
 })
 
