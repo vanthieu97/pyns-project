@@ -17,7 +17,7 @@ const Home = () => {
   useEffect(() => {
     if (data) {
       message.success('Tạo báo cáo thành công')
-      window.open(data.pdf)
+      window.open(data.pdf, '_self')
     }
   }, [data])
 
