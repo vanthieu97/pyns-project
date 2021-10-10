@@ -48,10 +48,12 @@ const MyHeader = () => {
         </Menu>
       ) : (
         <Space className="auth-space" size="large">
-          <Link href={`/login?next=${encodeURIComponent(pathname)}`}>
+          {/* <Link href={`/login?next=${encodeURIComponent(pathname)}`}> */}
+          <Link href={`/login`}>
             <a>Đăng nhập</a>
           </Link>
-          <Link href={`/register?next=${encodeURIComponent(pathname)}`}>
+          {/* <Link href={`/register?next=${encodeURIComponent(pathname)}`}> */}
+          <Link href={`/register`}>
             <a>Đăng ký</a>
           </Link>
         </Space>

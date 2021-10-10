@@ -22,7 +22,8 @@ const Register = () => {
   useEffect(() => {
     if (router.isReady && token) {
       message.success('Đăng nhập thành công')
-      router.push(router.query.next ?? '/')
+      // router.push(router.query.next ?? '/')
+      router.push('/')
     }
   }, [router.isReady, token])
 
@@ -30,9 +31,9 @@ const Register = () => {
     if (registerSuccess) {
       message.success('Đăng ký thành công')
       const nextQuery = router.query.next
-      if (nextQuery) {
-        return router.push(`/login?next=${encodeURIComponent(nextQuery)}`)
-      }
+      // if (nextQuery) {
+      //   return router.push(`/login?next=${encodeURIComponent(nextQuery)}`)
+      // }
       return router.push('/login')
     }
   }, [registerSuccess])

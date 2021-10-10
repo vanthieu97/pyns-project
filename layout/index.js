@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react'
-import dynamic from 'next/dynamic'
 import { Layout } from 'antd'
-import { HIDDEN_HEADER_PAGE, LOCAL_STORAGE_TOKEN } from 'shared/constants'
+import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
-import { setToken } from 'redux/user'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { setToken } from 'redux/user'
+import { HIDDEN_HEADER_PAGE, LOCAL_STORAGE_TOKEN } from 'shared/constants'
 
 const MyHeader = dynamic(() => import('./header'))
 const MyBreadcrumb = dynamic(() => import('./breadcrumb'))
@@ -31,7 +31,8 @@ const MyLayout = ({ children }) => {
     if (token || notCheckLoginMapping.includes(pathname)) {
       return setRender(true)
     }
-    router.push(`/login?next=${encodeURIComponent(pathname)}`)
+    // router.push(`/login?next=${encodeURIComponent(pathname)}`)
+    router.push(`/login`)
   }, [init, token, pathname])
 
   return (

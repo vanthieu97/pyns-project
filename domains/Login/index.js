@@ -1,14 +1,14 @@
-import React, { useEffect } from 'react'
-import Link from 'next/link'
-import Head from 'next/head'
-import { Typography, Form, Input, Button, Divider, message } from 'antd'
-import { useForm } from 'antd/lib/form/Form'
 import { LockOutlined, MobileOutlined } from '@ant-design/icons'
-import { PHONE_REGEX } from 'shared/constants'
-import { useLoginMutation } from 'redux/pynsAPIs'
+import { Button, Divider, Form, Input, message, Typography } from 'antd'
+import { useForm } from 'antd/lib/form/Form'
+import Head from 'next/head'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { getErrorMessage } from 'shared/utility'
+import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
+import { useLoginMutation } from 'redux/pynsAPIs'
+import { PHONE_REGEX } from 'shared/constants'
+import { getErrorMessage } from 'shared/utility'
 
 const { Title } = Typography
 const { Item } = Form
@@ -22,7 +22,8 @@ const Login = () => {
   useEffect(() => {
     if (router.isReady && token) {
       message.success('Đăng nhập thành công')
-      router.push(router.query.next ?? '/')
+      // router.push(router.query.next ?? '/')
+      router.push('/')
     }
   }, [router.isReady, token])
 
