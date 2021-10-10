@@ -15,7 +15,7 @@ export default [
   },
   {
     title: 'Tên gói',
-    dataIndex: 'pack_name',
+    dataIndex: 'package_name',
   },
   {
     title: 'Thời gian mua',

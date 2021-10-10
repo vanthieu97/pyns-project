@@ -85,6 +85,7 @@ export const pynsAPIs = createApi({
         dispatch(setUser(data))
         localStorage.setItem(LOCAL_STORAGE_TOKEN, data.token)
       },
+      invalidatesTags: (result) => result && ['GetMyPacks', 'User'],
     }),
     register: build.mutation({
       query: registerQuery,
