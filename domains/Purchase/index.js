@@ -2,11 +2,13 @@ import { Button, Form, InputNumber, message, Select, Typography } from 'antd'
 import Head from 'next/head'
 import React, { useEffect } from 'react'
 import { useGetListPacksQuery, usePurchasePackMutation } from 'redux/pynsAPIs'
+import { useRouter } from 'next/router'
 
 const { Item } = Form
 
 const Purchase = () => {
   const [form] = Form.useForm()
+  const router = useRouter()
 
   const { data: getListPacksData, error: getListPacksError, isFetching: getListPacksLoading } = useGetListPacksQuery()
 
@@ -16,6 +18,7 @@ const Purchase = () => {
   useEffect(() => {
     if (purchasePackSuccess) {
       message.success('Mua gói thành công')
+      router.push('/package')
     }
   }, [purchasePackSuccess])
 

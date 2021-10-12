@@ -41,10 +41,8 @@ const Home = () => {
       </Head>
       <Row gutter={12}>
         <Col span={24} lg={token ? 16 : null}>
-          <img src="/images/logo.png" width={200} alt="logo" />
-          <Typography.Text className="d-block">Introduce about PyNS</Typography.Text>
           <img
-            src="https://image-component.nextjs.gallery/_next/image?url=%2F_next%2Fstatic%2Fimage%2Fpublic%2Fmountains.cd25efdd516891bfe546f854798714be.jpg&w=750&q=75"
+            src="/images/bg_home_page.jpg"
             alt="logo"
             width="100%"
           />
@@ -65,7 +63,6 @@ const Home = () => {
               </Item>
               <Item
                 name="phone"
-                required
                 rules={[
                   {
                     validator(_, value) {

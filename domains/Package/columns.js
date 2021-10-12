@@ -1,6 +1,3 @@
-import moment from 'moment'
-import { BE_DATE_FORMAT, DATE_FORMAT } from 'shared/constants'
-
 const statusNameMapping = {
   not_confirmed: 'Chờ xác nhận',
   confirmed: 'Đã xác nhận',
@@ -18,14 +15,23 @@ export default [
     dataIndex: 'package_name',
   },
   {
-    title: 'Thời gian mua',
-    dataIndex: 'purchased_at',
+    title: 'Số lần dùng',
+    dataIndex: 'package_quantity',
     align: 'center',
-    render: (value) => moment(value, BE_DATE_FORMAT).format(DATE_FORMAT),
   },
   {
-    title: 'Số lượng mua',
+    title: 'Số lượng gói',
+    dataIndex: 'package_count',
+    align: 'center',
+  },
+  {
+    title: 'Tổng lần dùng',
     dataIndex: 'total_quantity',
+    align: 'center',
+  },
+  {
+    title: 'Thời gian mua',
+    dataIndex: 'purchased_at',
     align: 'center',
   },
   {

@@ -23,7 +23,6 @@ export default (onDownload) => [
     title: 'Ngày sinh',
     dataIndex: 'date_of_birth',
     align: 'center',
-    render: (value) => moment(value, BE_DATE_FORMAT).format(DATE_FORMAT),
   },
   {
     title: 'Hành động',
